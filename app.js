@@ -22,10 +22,10 @@ app.get('/', function(req, res) {
   if (spotifyApi.getAccessToken()) {
     return res.send('You are logged in.');
   }
-  return res.send('<a href="/authorize">Authorise</a>');
+  return res.send('<a href="https://accounts.spotify.com/authorize">Authorise</a>');
 });
 
-app.get('/authorize', function(req, res) {
+app.get('https://accounts.spotify.com/authorize', function(req, res) {
   var scopes = ['playlist-modify-public', 'playlist-modify-private'];
   var state  = new Date().getTime();
   var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
