@@ -7,9 +7,9 @@ var SpotifyWebApi = require('spotify-web-api-node');
 dotenv.load();
 
 var spotifyApi = new SpotifyWebApi({
-  clientId     : "c9a79be7057d4d4b9179084b5fcc1dd6",
-  clientSecret : "0369c30e319242058f75ce9707e47074",
-  redirectUri  : "https://www.ioninteractive.com"
+  clientId     : 'c9a79be7057d4d4b9179084b5fcc1dd6',
+  clientSecret : '0369c30e319242058f75ce9707e47074',
+  redirectUri  : 'https://www.ioninteractive.com'
 });
 
 var app = express();
