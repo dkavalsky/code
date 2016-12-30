@@ -7,9 +7,9 @@ var SpotifyWebApi = require('spotify-web-api-node');
 dotenv.load();
 
 var spotifyApi = new SpotifyWebApi({
-  clientId     : 'c9a79be7057d4d4b9179084b5fcc1dd6',
-  clientSecret : '0369c30e319242058f75ce9707e47074',
-  redirectUri  : 'https://www.ioninteractive.com'
+  clientId     : process.env.SPOTIFY_KEY,
+  clientSecret : process.env.SPOTIFY_SECRET,
+  redirectUri  : process.env.SPOTIFY_REDIRECT_URI
 });
 
 var app = express();
@@ -44,7 +44,7 @@ app.get('/callback', function(req, res) {
 });
 
 app.use('/store', function(req, res, next) {
-  if (req.body.token !== "SHXFzFefl0MoquNpWA9l4Ktn") {
+  if (req.body.token !== process.env.SLACK_TOKEN) {
     return res.status(500).send('Cross site request forgerizzle!');
   }
   next();
@@ -70,7 +70,7 @@ app.post('/store', function(req, res) {
             return res.send('Could not find that track.');
           }
           var track = results[0];
-          spotifyApi.addTracksToPlaylist("dsky0921", "0nlbyGne4EJig2j6FdtTGx", ['spotify:track:' + track.id])
+          spotifyApi.addTracksToPlaylist(process.env.SPOTIFY_USERNAME, process.env.SPOTIFY_PLAYLIST_ID, ['spotify:track:' + track.id])
             .then(function(data) {
               return res.send('Track added: *' + track.name + '* by *' + track.artists[0].name + '*');
             }, function(err) {
